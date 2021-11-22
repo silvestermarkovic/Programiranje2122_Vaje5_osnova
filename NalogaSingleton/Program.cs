@@ -15,7 +15,7 @@ namespace NalogaSingleton
             Random _random = new Random();
 
             //TODO: 2.7. odkomenirajte
-            /*odkomentirajte ----------------------111 do vrstice 55
+          
            
             //tu vidimo, kako deluje singleton, da gre za isto instanco
             //VrniRazporeditelj (kliče konstruktor)
@@ -44,19 +44,32 @@ namespace NalogaSingleton
             var razporediteljbremena = Razporeditelj.VrniRazporeditelj();
 
 
+            int teza = 1;
+
             //TODO: 2.8. ustvarite 10 klicev naključnih obremenitev   
             // int teza = _random.Next(10, 30);
             // Obremenitev(_random.Next(1, 4), razporediteljbremena.NaslednjiStreznik(teza), teza);
+            for (int i = 0; i < 10; i++)
+            {
+                  teza = _random.Next(10, 30);
 
+                Obremenitev(_random.Next(2, 6), razporediteljbremena.NaslednjiStreznik(teza), teza);
+            }
             // za obremenitev kličite
             //ustvarite 200 klicev naključnih obremenitev  
-            // int teza = _random.Next(10, 30);
-            // Task<int> naloga = ObremenitevAsync(_random.Next(1, 4), razporediteljbremena.NaslednjiStreznik(teza), teza);
+         
+            
+            for (int i = 0; i < 200; i++)
+            {
+                  teza = _random.Next(10, 30);
+                //zaženemo Task in nadaljujemo
+                Task<int> naloga = ObremenitevAsync(_random.Next(2, 6), razporediteljbremena.NaslednjiStreznik(teza), teza);
 
+                //
+
+            }
             //kakšna je razlika
- 
-            odkomentirajte ----------------------111
-            */
+
             Console.WriteLine("Razporejeno\n");
             // Počakamo pred koncem
             Console.ReadKey();
@@ -66,7 +79,7 @@ namespace NalogaSingleton
         //metoda nam bo obremenila streznik za dolocen čas
         //metoda ja async (več je predvideno v nadaljevanju)
         //TODO: 2.6. odkomenirajte
-        /* odkomenitaj 3333
+     
         public static async Task<int> ObremenitevAsync(double cas, Streznik pstreznik, int pteza)
         {
             //povečamo StKlicev
@@ -111,7 +124,6 @@ namespace NalogaSingleton
             Console.WriteLine("Konec (" + temp + "/" + pstreznik.StKlicev + "): " + pstreznik.Name + " Cas: " + cas + "s  Zahtevnost:" + pteza + " " + pstreznik.Obremenitev + "/" + pstreznik.ObremenitevMax);
 
         }
-        odkomenitaj 3333
-        */
+      
     }
 }

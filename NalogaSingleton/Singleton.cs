@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace NalogaSingleton
 {
@@ -13,7 +14,18 @@ namespace NalogaSingleton
     //javno obremenitev (get/set)   double  trenutna obremenitev
     //javno ObremenitevMax (get/set) double maksimalna obremenitev streznika
     //koda razreda
+    public class Streznik
+    {
+        // Gets or sets server name
+        public string Name { get; set; }
+        // Gets or sets server IP address
+        public string Ip { get; set; }
+        public int StKlicev { get; set; }
+        public double Obremenitev { get; set; }
+        public double ObremenitevMax { get; set; }
 
+        public bool VServisu { get; set; }
+    }
 
     //TODO: 2.2. ustvarite sealed class Razporeditelj (odkomentirajte predpriplajvljeno osnovo)
     public sealed class Razporeditelj
@@ -28,17 +40,24 @@ namespace NalogaSingleton
 
 
         //TODO: 2.3. ustvarite privatni seznam _strezniki tipa Strezniki (get/set) 
-        //koda
+        private List<Streznik> _strezniki { get; set; }
+
+
         //TODO: 2.3A. ustvarite spremenljivko sprozenAlarm tipa bool privzena vrednost = false
-        //koda
+        public bool sprozenAlarm = false;
 
         //Pazite: konstruktor je 'private'
         //TODO: 2.4. uredite konstruktor, ki bo napolnil _strezniki s podatki o 3-5 streznikih
         //StKlicev naj bo vedno enako 0, ObremenitevMax naj bo med 100 in 200
         private Razporeditelj()
         {
-            //vasa koda
-            //pomoc  _strezniki = new List<Streznik>... seznam strežnikov
+            // Load list of available servers
+            _strezniki = new List<Streznik>
+                    {
+                        new Streznik{ Name = "Server1", Ip = "10.10.10.1", StKlicev = 0, ObremenitevMax = 100, VServisu = false},
+                        new Streznik{ Name = "Server2", Ip = "10.10.10.2", StKlicev = 0, ObremenitevMax = 100, VServisu = false},
+                        new Streznik{ Name = "Server3", Ip = "10.10.10.3", StKlicev = 0, ObremenitevMax = 200, VServisu = false},
+                };
         }
 
 
@@ -52,7 +71,7 @@ namespace NalogaSingleton
 
         //predpripravljeni razporeditelj nalog na streznike
 
-        /*odkomentirajte!!!!!!!!!!!!!!!!!!!!!!2222
+       
         public Streznik NaslednjiStreznik(int pteza)
         {
              
@@ -74,8 +93,7 @@ namespace NalogaSingleton
                 Thread.Sleep(500);
             }
         }
-        //odkomentirajte!!!!!!!!!!!!!!!!!!!!!!2222
-        //*/
+        
     }
 
 }
